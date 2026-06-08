@@ -351,18 +351,18 @@
         </div>
         <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
             <div class="time">17:00</div>
-            <h3>Выездная регистрация</h3>
+            <h3>Начало торжества</h3>
             <p>Самый трогательный момент. Не забудьте приготовить носовые платки!</p>
         </div>
         <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
-            <div class="time">18:00</div>
+            <div class="time">18:00?????</div>
             <h3>Свадебный ужин</h3>
             <p>Время для теплых поздравлений, изысканных блюд и безудержного веселья.</p>
         </div>
         <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
             <div class="time">22:00</div>
-            <h3>Торт и финал вечера</h3>
-            <p>Сладкое завершение праздника и яркие бенгальские огни.</p>
+            <h3>ХЗ</h3>
+            <p>хз</p>
         </div>
     </div>
 </section>
@@ -371,7 +371,7 @@
 <section class="rsvp">
     <h2 data-aos="fade-up">Подтверждение присутствия</h2>
     <p data-aos="fade-up" data-aos-delay="200">
-        Пожалуйста, ответьте на несколько вопросов ниже до 1 августа 2026 года, чтобы мы могли сделать праздник комфортным для каждого.
+        Пожалуйста, ответьте на несколько вопросов ниже до 30 июля 2026 года, чтобы мы могли сделать праздник комфортным для каждого.
     </p>
 
     <form class="rsvp-form" data-aos="fade-up" data-aos-delay="400" onsubmit="submitForm(event)">
@@ -431,7 +431,47 @@
     // Обработка формы
     function submitForm(event) {
         event.preventDefault();
-        alert("Спасибо за ваш ответ! Мы зафиксировали ваши пожелания.");
+
+        // Получаем кнопку отправки, чтобы заблокировать её от повторных кликов
+        const form = event.target;
+        const button = form.querySelector("button");
+        const originalButtonText = button.innerText;
+
+        // Меняем текст кнопки во время отправки
+        button.disabled = true;
+        button.innerText = "Отправка...";
+
+        // Собираем данные из полей
+        const name = document.getElementById("name").value;
+        const attend = document.querySelector('input[name="attend"]:checked').value;
+
+        // Сюда вставьте ссылку, которую скопировали на Шаге 3
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbyrXnDZ5eOVYLhkwn3l_ixVZ2mkA8i1niMVgikGmkQFZXLxUBLN2mIo04AVIQtNTlE5/exec";
+
+        // Отправляем данные на сервер Google
+        fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors', // Позволяет отправлять запросы без проблем с CORS политиками
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: name, attend: attend })
+        })
+            .then(() => {
+                // Так как используется режим 'no-cors', JavaScript не может прочитать
+                // ответ от Google (он приходит пустой), но если мы попали в этот блок — запрос ушел успешно.
+                alert("Спасибо за ваш ответ! Мы зафиксировали ваши пожелания.");
+                form.reset(); // Очищаем форму
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке:', error);
+                alert("Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.");
+            })
+            .finally(() => {
+                // Возвращаем кнопку в исходное состояние
+                button.disabled = false;
+                button.innerText = originalButtonText;
+            });
     }
 </script>
 </body>
