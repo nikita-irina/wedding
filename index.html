@@ -52,6 +52,31 @@
             color: var(--primary-color);
         }
 
+        .logo {
+            width: 100%;
+            /* Максимальная ширина логотипа на больших экранах.
+               Измените 250px на нужный вам размер (например, 200px или 300px) */
+            max-width: 400px;
+            padding-top: 50px;
+
+            /* Делает контейнер идеально квадратным 1:1.
+               Если логотип должен быть прямоугольным, измените, например, на 16/9 */
+            aspect-ratio: 1 / 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 170%;
+            /* Умное кадрирование: картинка заполнит контейнер,
+               обрежется по краям и отцентрируется без искажения пропорций */
+            object-fit: cover;
+            object-position: center;
+        }
         h2 {
             font-size: 3.2rem;
             margin-bottom: 30px;
@@ -273,7 +298,14 @@
             font-size: 1.8rem;
             font-style: italic;
         }
-
+        .no-select {
+            -webkit-touch-callout: none; /* iOS Safari: отключает меню при долгом нажатии */
+            -webkit-user-select: none;   /* Safari */
+            -khtml-user-select: none;    /* Старые браузеры на движке Konqueror */
+            -moz-user-select: none;      /* Старый Firefox */
+            -ms-user-select: none;       /* Internet Explorer / Edge */
+            user-select: none;           /* Стандартное свойство (Chrome, Opera, новый Edge, Firefox) */
+        }
         /* Кастомные анимации для первого экрана */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
@@ -302,7 +334,7 @@
 
 <!-- Главный экран -->
 <section class="hero">
-    <h1 data-aos="fade-down">Никита & Ирина</h1>
+    <div class="logo" draggable="false"><img draggable="false" class="no-select" src="logo.png" alt=""></div>
     <div class="hero-subtitle">Приглашение на свадьбу</div>
     <div class="hero-date">29.08.2026</div>
 </section>
