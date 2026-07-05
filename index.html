@@ -341,15 +341,27 @@
 
 <!-- Секция: Приглашение -->
 <section class="invitation">
-    <h2 data-aos="fade-up">Дорогие близкие и друзья!</h2>
-    <p data-aos="fade-up" data-aos-delay="200">
-        Один день в жизни делает нас по-настоящему счастливыми, потому что мы разделим его с вами.
-        Мы рады пригласить вас на торжество, посвященное дню нашей свадьбы!
-    </p>
-    <p data-aos="fade-up" data-aos-delay="400">
-        До начала праздника осталось:
-    </p>
-    <!-- Таймер обратного отсчета -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1000px;">
+
+        <!-- Текстовая часть -->
+        <div style="flex: 1; min-width: 300px; text-align: left;">
+            <h2 data-aos="fade-up" style="text-align: left;">Дорогие близкие и друзья!</h2>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Один день в жизни делает нас по-настоящему счастливыми, потому что мы разделим его с вами.
+                Мы рады пригласить вас на торжество, посвященное дню нашей свадьбы!
+            </p>
+            <p data-aos="fade-up" data-aos-delay="400">
+                До начала праздника осталось:
+            </p>
+        </div>
+
+        <!-- Картинка -->
+        <div data-aos="fade-up" data-aos-delay="300" style="flex: 0 0 400px;">
+            <img src="marryed.jpg" alt="Никита и Ирина" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        </div>
+    </div>
+
+    <!-- Таймер остается под блоком -->
     <div class="timer-container" data-aos="zoom-in" data-aos-delay="600">
         <div class="timer-block">
             <span id="days">00</span>
@@ -444,7 +456,6 @@
         г. Бор, ул. Островского, 23
     </p>
 </section>
-
 <footer>
     Ждем вас! Никита и Ирина
 </footer>
@@ -480,7 +491,6 @@
             document.querySelector(".timer-container").innerHTML = "<h3>Этот счастливый день настал!</h3>";
         }
     }, 1000);
-
     // Обработка формы
     function submitForm(event) {
         event.preventDefault();
@@ -513,7 +523,7 @@
             .then(() => {
                 // Так как используется режим 'no-cors', JavaScript не может прочитать
                 // ответ от Google (он приходит пустой), но если мы попали в этот блок — запрос ушел успешно.
-                alert("Спасибо за ваш ответ! Мы зафиксировали ваши пожелания.");
+                alert("Спасибо за ваш ответ!");
                 form.reset(); // Очищаем форму
             })
             .catch(error => {
